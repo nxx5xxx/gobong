@@ -21,11 +21,26 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private HttpServletRequest request;
 	
-	// 글 목록 보기 
+	//전재영0718 글 목록 보기 
+	@Override
 	public List<BoardDTO> getBoardList(){
 		List<BoardDTO> boardList = boardDAO.getBoardList();
 		return boardList;
 	}
+	
+	/* 김우주0719 */
+	private int boardNoGenerator() {
+		List<BoardDTO> boardList = boardDAO.getBoardList();
+		if(boardList.size()==0) {
+			return 0;
+		}else {
+			return boardList.get(0).getNo();
+		}
+	}
+	//재호씨 boardInsert에 연계됩니다
+	//각주 달아놓은거 참고해주세요
+	/*//김우주0719 */
+	
 	
 	/* 이재호0718 */
 	private String saveUploadFile(MultipartFile uploadFile) {
@@ -45,6 +60,10 @@ public class BoardServiceImpl implements BoardService {
 		System.out.println("no" + boardDTO.getNo());
 		System.out.println("content" + boardDTO.getContent());
 		System.out.println("img1" + boardDTO.getImg1());
+		/* 김우주0719 */
+		System.out.println(boardNoGenerator());
+		boardDTO.setNo(boardNoGenerator()+1);
+		/*//김우주0719 */
 		MultipartFile upload_img1 = boardDTO.getUpload_img1();
 		
 		if(upload_img1.getSize()>0) {

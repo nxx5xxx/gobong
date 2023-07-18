@@ -39,7 +39,6 @@ CREATE TABLE board1 (
 
 alter table board1 drop column upcheck;
 
-insert into board1 values(3, 'wjdwnsgk', '안녕하세요123456666');
 
 commit;
 
@@ -141,3 +140,9 @@ CREATE TABLE test_board (
 insert into test_board values(1,'테스트내용입니다','file');
 commit;
 select * from test_board;
+
+insert into board1 values (9, 'test1', '테스트내용1', '#해시태그', default, default, 'test1.jpg', 'img2.png', 'img3.png', default);
+delete from board1 where no>=0;
+commit;
+select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate from user1 u inner join board1 b on u.id=b.id order by b.no desc;
+select * from board1;

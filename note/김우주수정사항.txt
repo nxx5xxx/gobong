@@ -43,3 +43,65 @@ CREATE TABLE board1 (
 --수정으로 컬럼제거할시
 
 alter table board1 drop column upcheck;
+
+
+-- 0719
+1)
+	join_success.jsp
+	join.jsp
+	login.jsp
+	세 파일 views>user(생성한폴더)로 옮김
+
+2)
+	header.jsp
+	          <!-- 김우주0719 -->
+	          <!-- <a href="${path1 }/user/join" class="button is-success is-light" onclick="join()">회원가입</a> -->
+	          <input type="button" class="button is-success is-light" value="회원가입" onclick="joinbtn()"/>
+	          <script>
+	          	function joinbtn(){
+	          		alert('join회원가입 시작');
+	          		window.open('${path1 }/user/join','회원가입','width=700px,height=800px,scrollbars=yes');
+	          	}
+	          	
+	          </script>
+	          <!-- //김우주0719 -->	 
+
+3)
+	UserController.java 
+	@RequestMapping("/user")추가
+
+4)
+	UserController.java
+	return (26,32,36번째줄 ) 에 user/ 추가
+	
+	*
+	1번 작업을 안하더라도 2~4번 2번의 path1작업을 안할시
+	board같은 url에서(게시판보기) join으로 들어간다면
+	gobong/join 이아닌
+	gobong/board/join이 되어 404에러가 나게됩니다
+
+5)
+	join.jsp 하단 copy라이트부분 빼버림
+	(join.jsp덮어씌우기 하면됩니다)
+
+6)
+	게시판고유번호(게시판이 없을시, 게시판이 겹칠시 등등 nextval의 기능해줄수있는것)을 추가하였습니다
+	BoardServiceImpl.java
+	31번째줄 주석
+	63번째줄 주석
+	
+	
+7) 
+	승기씨파일 합치기 작업
+	
+8)
+	header.jsp
+	73번째줄 수정
+			<form:form action="${path1 }/user/loginPro" modelAttribute="tmpUserLogin"
+			method="post" class="box">
+			
+9) 
+	form:form태그 사용시 모델어트리뷰트 충돌로인해
+			<form action="${path1 }/user/loginPro"	method="post" class="box">
+	태그 등으로 수정
+	안에 /form:form 까지 싹다 드래그해서 붙여넣기하면 될겉같음

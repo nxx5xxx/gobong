@@ -6,7 +6,7 @@
 	<!-- 글 목록 보기 -->
 	<select id="getBoardList" parameterType="java.lang.Integer" resultType="kr.gobong.domain.BoardDTO">
 		<![CDATA[
-			select u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate from user1 u inner join board1 b on u.id=b.id order by b.no desc
+			select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate from user1 u inner join board1 b on u.id=b.id order by b.no desc
 		]]>
 	</select>
 	

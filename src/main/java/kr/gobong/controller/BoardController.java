@@ -2,7 +2,10 @@ package kr.gobong.controller;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.gobong.domain.BoardDTO;
+import kr.gobong.domain.UserDTO;
 import kr.gobong.service.BoardService;
 
 
@@ -20,6 +24,10 @@ public class BoardController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Resource(name = "loginUser")
+	@Lazy
+	private UserDTO loginUser;
 	
 	/* 전재영0718 */
 	// 글 목록 보기
