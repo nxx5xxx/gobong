@@ -15,22 +15,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
-  <title>글 목록 보기</title>
+  <title>글 상세 보기</title>
 	<link rel="stylesheet" href="${data_path }/css/main.css">
-  <style>
-  	.content .content1 { width: 750px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  	.card {margin-bottom:40px;}
-  </style>	
 </head>
 <body>
 <c:import url="/WEB-INF/views/header.jsp" />
   <div class="container">
-  	<c:forEach items="${boardList}" var="boardDTO" varStatus="cnt">
 	    <div class="card-wrap">
 	      <div class="card">
 	        <div class="card-image">
 	          <figure class="image is-4by3">
-	            <a href="${path }/board/boarddetail?no=${boardDTO.no}"><img src="${data_path }/upload/${boardDTO.img1 }" alt="글사진"></a>
+	          <input type="hidden" name="no" value="${boardDTO.no }" />
+	            <img src="${data_path }/upload/${boardDTO.img1 }" alt="글사진1">
+	            <!-- 슬라이드 이미지로 바꿔야돼요 -->
+	            <%-- <img src="${data_path }/upload/${boardDTO.img2 }" alt="글사진2">
+	            <img src="${data_path }/upload/${boardDTO.img3 }" alt="글사진3"> --%>
 	          </figure>
 	        </div>
 	        <div class="card-content">
@@ -46,44 +45,17 @@
 	            </div>
 	          </div>
 	          <div class="content">
-	            <p class="content1" >${boardDTO.content }</p>
-	            <p style="color: blue;">#${boardDTO.hashtag }</p>
+	            <p class="content1">${boardDTO.content }</p>
+	            <p>${boardDTO.hashtag }</p>
 	            <time datetime="2016-1-1">${boardDTO.regdate }</time>
 	          </div>
-	          <!-- 김우주0719 -->
-		      <div class="field">
-		      	<c:choose>
-		      	<c:when test="${loginUser.userLogin == true }">       
-	          		<input type="button" value="좋아요" onclick="like_check(${boardDTO.up },${boardDTO.no })"/>
-	          	</c:when>
-				<c:otherwise>
-					<input type="button" value="좋아요" onclick="goClick()"/>
-				</c:otherwise>
-				</c:choose>
-					<a href="${path }/board/boardMod?no=${boardDTO.no}" class="button is-success is-light">수정</a>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="${path }/board/boardDel?no=${boardDTO.no}" class="button is-danger is-light">삭제</a>
+	          <div>
+	          	<a href="${path }/board/boardEdit?no=${boardDTO.no}" class="button">수정</a>
+	          	<a href="" class="button">삭제</a>
 	          </div>
-	          <script>
-	          	function like_check(like,no){
-	          		
-	          		alert('글번호' + no);
-	          		alert('현재좋아요수' + like);
- 	          		$.ajax({
- 						type:"get",
-						url:"${path}/like/upLike.do",
-						dataType:"json",
-						encType:"UTF-8",
-						data: {no:no},
-						//async: false
-	          		});
-	          	}
-	          </script>
-	          <!-- //김우주0719 -->
 	        </div>
 	      </div>
 	     </div>
-	  </c:forEach> 
    </div>
    <footer class="footer">
     <div class="content has-text-centered">

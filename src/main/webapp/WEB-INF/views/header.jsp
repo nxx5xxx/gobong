@@ -5,6 +5,12 @@
 <c:set var="path1" value="${pageContext.request.contextPath }" />
 <c:set var="data_path1"
 	value="${pageContext.request.contextPath }/resources" />
+<!-- 김우주0719 -->
+  <script
+  src="https://code.jquery.com/jquery-3.7.0.min.js"
+  integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+  crossorigin="anonymous"></script>
+ <!-- //김우주0719 -->
 <nav class="navbar" role="navigation" aria-label="main navigation">
 	<div class="navbar-brand">
 		<a class="navbar-item" href="${path1 }/"><img class="logo"
@@ -12,20 +18,17 @@
 	</div>
 	<div id="navbarBasicExample" class="navbar-menu">
 		<div class="navbar-start">
-			<a class="navbar-item" href="fd_content">친구 게시글</a> <a
-				class="navbar-item" href="${path1 }/board/boardlist">전체 게시글</a>
-				<a href="${path1 }/board/boardInsert" class="navbar-link">글쓰기</a>
-			<!--      글쓰기 화면에서 공개 여부 설정할 거면 삭제해도 되는 부분
-		  <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link">글쓰기</a>
-            <div class="navbar-dropdown">
-              <a class="navbar-item" href="all_add">전체 공개</a>
-              <a class="navbar-item" href="fd_add">친구 공개</a>
-              <hr class="navbar-divider">
-              <a class="navbar-item" href="me_add">나만 보기</a>
-            </div>
-          </div> 
--->
+         <a class="navbar-item" href="${path1 }/board/boardlist">전체 게시글</a>
+         <c:choose>
+            <c:when  test="${loginUser.userLogin == true }">
+               <a class="navbar-item" href="${path1 }/board/friendboardlist">친구 게시글</a>
+               <a href="${path1 }/board/boardInsert" class="navbar-link">글쓰기</a>
+            </c:when>
+            <c:otherwise> 
+               <a class="navbar-item" onclick="goClick()">친구 게시글</a>
+               <a class="navbar-link" onclick="goClick()">글쓰기</a>
+            </c:otherwise>
+         </c:choose>
 			<div class="level-item" style="margin: 15px;">
 				<div class="field has-addons">
 					<p class="control">
@@ -39,8 +42,7 @@
 		</div>
 	</div>
 	<div class="navbar-end">
-		<!-- 0718손승기 -->
-		<!-- 로그인 전 -->
+		<!-- 0718손승기 --><!-- 로그인 전 -->
 		<c:choose>
 			<c:when test="${loginUser.userLogin == true }">
 				<!-- 로그인 후 -->
@@ -56,9 +58,7 @@
 			<c:otherwise>
 				<div class="navbar-item">
 					<div class="buttons">
-						<a class="button is-warning is-hovered" id="go"> <strong>Let's
-								Gobong !</strong>
-						</a>
+						<button type="button" class="button is-warning is-hovered" onclick="goClick()" > <strong>Let's Gobong !</strong></button>
 					</div>
 				</div>
 			</c:otherwise>
@@ -102,21 +102,18 @@
 		</form>
 		<!-- 0718 손승기 -->
 	</div>
-	<button id="exit" class="button">나가기</button>
+	<button onclick="exit()" class="button">나가기</button>
 </div>
-
+<!-- 태정씨스크립트문 줄인것 -->
 <script>
-        const go = document.querySelector("#go");
-        const bg = document.querySelector("#bg");
-        const popup = document.querySelector("#popup");
-        const exit = document.querySelector("#exit");
 
-        go.addEventListener("click",function(){
-            bg.classList.remove("hidden");
-            popup.classList.remove("hidden");
-        });
-        exit.addEventListener("click",function(){
-            bg.classList.add("hidden");
-            popup.classList.add("hidden");
-        });
-    </script>
+function goClick(){
+    $("#bg").removeClass("hidden");
+    $("#popup").removeClass("hidden");
+}
+function exit(){
+    $("#bg").addClass("hidden");
+    $("#popup").addClass("hidden");
+}
+</script>
+<!--  -->

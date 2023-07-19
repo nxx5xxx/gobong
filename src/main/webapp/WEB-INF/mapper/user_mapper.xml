@@ -17,12 +17,12 @@
     ]]>
 	</select>
 
-	<select id="addUserInfo"
+	<insert id="addUserInfo"
 		parameterType="kr.gobong.domain.UserDTO">
  	<![CDATA[
- 		insert into user1 values(#{id},#{name},#{pw},#{email},#{tel},default,default)
+ 		insert into user1(id,name,pw,email,tel,regdate,img) values(#{id},#{name},#{pw},#{email},#{tel},default,default)
  	]]>
-	</select>
+	</insert>
 	
 	 <select resultType="kr.gobong.domain.UserDTO" parameterType="kr.gobong.domain.UserDTO" id="getUserLogin">
  		<![CDATA[

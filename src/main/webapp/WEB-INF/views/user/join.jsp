@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
-<c:set var="path1" value="${pageContext.request.contextPath }/" />
+<c:set var="path1" value="${pageContext.request.contextPath }" />
 <c:set var="data_path1" value="${pageContext.request.contextPath }/resources"/>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form action="${path1 }/join_procedure" method="post" modelAttribute="joinUserDto" class="box">
+					<form:form action="${path1 }/user/join_procedure" method="post" modelAttribute="joinUserDto" class="box">
 					<%-- <form:hidden path="userIdExist" /> --%>
 						<div class="field">
 							<form:label path="id" class="label">아이디</form:label>

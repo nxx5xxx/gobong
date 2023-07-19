@@ -25,6 +25,9 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardDTO> getBoardList(){
 		List<BoardDTO> boardList = boardDAO.getBoardList();
+		/* 김우주0719 */
+
+		/*//김우주0719 */
 		return boardList;
 	}
 	
@@ -83,4 +86,52 @@ public class BoardServiceImpl implements BoardService {
 		boardDAO.boardInsert(boardDTO);
 	}
 	/*//이재호0718 */
+	
+	//조태정 0719 글 삭제
+	@Override
+	public void boardDel(int no) {
+		boardDAO.boardDel(no);
+	}
+	//친구 게시글 목록 보기
+	@Override
+	public List<BoardDTO> getFriendBoardList(String id) {
+		List<BoardDTO> boardList = boardDAO.getFriendBoardList(id);
+		return boardList;
+	}
+	
+	/* 전재영 0719 */
+
+	// 글 상세보기
+	@Override
+	public BoardDTO getBoardDetail(int no) {
+		return boardDAO.getBoardDetail(no);
+	}
+	
+	/* 김우주0719 */
+	
+	// 글 수정하기
+	@Override
+	public void boardEdit(BoardDTO boardDTO) {
+	
+		MultipartFile upload_img1 = boardDTO.getUpload_img1();
+		if(upload_img1.getSize()>0) {
+			String fileName1 = saveUploadFile(upload_img1);
+			boardDTO.setImg1(fileName1);
+		}
+		MultipartFile upload_img2 = boardDTO.getUpload_img2();
+		if(upload_img2.getSize()>0) {
+			String fileName2 = saveUploadFile(upload_img2);
+			boardDTO.setImg2(fileName2);
+		}
+		MultipartFile upload_img3 = boardDTO.getUpload_img3();
+		if(upload_img3.getSize()>0) {
+			String fileName3 = saveUploadFile(upload_img3);
+			boardDTO.setImg3(fileName3);
+		}
+		
+		boardDAO.boardEdit(boardDTO);
+	}
+	/*//김우주0719 */
+	
+	/*//전재영0719 */
 }
