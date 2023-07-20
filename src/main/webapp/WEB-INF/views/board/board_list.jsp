@@ -53,16 +53,20 @@
 	          <!-- 김우주0719 -->
 		      <div class="field">
 		      	<c:choose>
-		      	<c:when test="${loginUser.userLogin == true }">       
-	          		<input type="button" value="좋아요" onclick="like_check(${boardDTO.up },${boardDTO.no })"/>
-	          	</c:when>
-				<c:otherwise>
-					<input type="button" value="좋아요" onclick="goClick()"/>
-				</c:otherwise>
+			      	<c:when test="${loginUser.userLogin == true }">       
+		          		<input type="button" value="좋아요" onclick="like_check(${boardDTO.up },${boardDTO.no })"/>
+		          	</c:when>
+					<c:otherwise>
+						<input type="button" value="좋아요" onclick="goClick()"/>
+					</c:otherwise>
 				</c:choose>
+				<!-- 0720김우주 -->
+				<c:if test="${boardDTO.id==loginUser.id}">
 					<a href="${path }/board/boardMod?no=${boardDTO.no}" class="button is-success is-light">수정</a>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<a href="${path }/board/boardDel?no=${boardDTO.no}" class="button is-danger is-light">삭제</a>
+				</c:if>
+				<!-- //0720김우주 -->	
 	          </div>
 	          <script>
 	          	function like_check(like,no){

@@ -44,6 +44,7 @@ public class BoardController {
 		List<BoardDTO> boardList = boardService.getBoardList();
 		model.addAttribute("boardList", boardList);
 		
+
 		return "board/board_list";
 	}
 	/*//전재영0718 */
