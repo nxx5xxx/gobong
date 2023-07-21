@@ -20,4 +20,5 @@ public interface UserDAO {
 	
 	public List<UserVO> getUserProfile(String id);
 	/* 0719 손승기 */
+	public void userDel(String id); //회원탈퇴
 }

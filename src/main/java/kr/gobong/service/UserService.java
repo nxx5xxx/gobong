@@ -22,4 +22,5 @@ public interface UserService {
 	
 	public List<UserVO> getUserProfile(String id);	//나의 프로필 불러오기
 	/* 0719 손승기 */
+	public void userDel(String id); //회원탈퇴
 }

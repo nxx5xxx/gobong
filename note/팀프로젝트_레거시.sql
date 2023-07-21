@@ -170,3 +170,15 @@ delete from board1 where no>=0;
 commit;
 select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate from user1 u inner join board1 b on u.id=b.id order by b.no desc;
 select * from board1;
+
+create table reply (rno number primary key, no number, id varchar2(30), comment1 varchar2(500), foreign key(no) references board1(no), foreign key(id) references user1(id));
+commit;
+select * from like1;
+delete from like1 where no=2 and id='test1';
+select * from board1;
+select * from user1;
+commit;
+select count(*) from like1 where no=2 and id='test1';
+
+delete from like1 where no=2 and id='test1';
+commit;

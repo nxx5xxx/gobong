@@ -122,4 +122,9 @@ public class UserServiceImpl implements UserService {
 		return userDao.getUserProfile(id);
 	}
 	/* 0719 손승기 */
+	//탈퇴
+	@Override
+	public void userDel(String id) {
+		userDao.userDel(id);
+	}
 }

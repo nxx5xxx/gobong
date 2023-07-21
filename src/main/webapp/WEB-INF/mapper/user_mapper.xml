@@ -61,5 +61,11 @@
  	]]>
  	</update>
  	<!-- 0719 손승기 -->
+ 	
+ 	<delete id="userDel" parameterType="kr.gobong.domain.UserDTO">
+		<![CDATA[
+	 		delete from user1 where id = #{id}
+	 	]]>
+ 	</delete>
 </mapper>
  

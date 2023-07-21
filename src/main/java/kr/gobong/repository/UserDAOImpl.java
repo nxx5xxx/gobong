@@ -52,4 +52,8 @@ public class UserDAOImpl implements UserDAO {
 		return sqlSessionTemplate.selectList("user1.getUserProfile", id);
 	}
 	/* 0719 손승기 */
+	@Override
+	public void userDel(String id) {
+		sqlSessionTemplate.delete("user1.userDel", id);
+	}
 }

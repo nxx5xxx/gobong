@@ -117,4 +117,11 @@ public class UserController {
 		}
 		
 		/*//김우주0720 */
+		//탈퇴
+		@GetMapping("/userDel")
+		public String userDel(@RequestParam("id") String id, Model model){
+			userService.userDel(id);
+			model.addAttribute("id", id);
+			return "user/user_del";
+		}
 }

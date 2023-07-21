@@ -43,7 +43,6 @@ public class BoardController {
 		
 		List<BoardDTO> boardList = boardService.getBoardList();
 		model.addAttribute("boardList", boardList);
-		
 
 		return "board/board_list";
 	}
@@ -141,7 +140,7 @@ public class BoardController {
 		boardService.boardEdit(boardEdit);
 		
 		//no추가
-		return "board/board_detail?no="+no;
+		return "redirect:/board/boarddetail?no="+no;
 	}
 	/* //0719전재영*/
 	
