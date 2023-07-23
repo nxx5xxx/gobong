@@ -49,14 +49,50 @@
 	            <p>${boardDTO.hashtag }</p>
 	            <time datetime="2016-1-1">${boardDTO.regdate }</time>
 	          </div>
-	          <div>
-	          	<a href="${path }/board/boardEdit?no=${boardDTO.no}" class="button">수정</a>
-	          	<a href="${path }/board/boardDel?no=${boardDTO.no}" class="button">삭제</a>
-	          </div>
+             <div style="align:center;">
+                <c:if test="${boardDTO.id==loginUser.id}">
+                   <a href="${path }/board/boardEdit?no=${boardDTO.no}" class="button is-success is-light">수정</a>
+                   <a href="${path }/board/boardDel?no=${boardDTO.no}" class="button is-danger is-light">삭제</a>
+                </c:if>   
+                   <a href="${path }/board/replyInsert?no=${boardDTO.no}" class="button is-warning is-light">댓글</a>   
+             </div>
 	        </div>
 	      </div>
 	     </div>
    </div>
+   <!-- 전재영0723 -->
+   <div class="container1" style="padding-top:40px;"> 
+	     <c:forEach items="${replyList}" var="replyDTO" varStatus="cnt">
+	     	<div class="card-wrap">
+	     		<div class="card">
+			     	 <div class="card-content">
+			     	 	<div class="media">
+			     			<div class="media-left">
+			     	 			<figure class="image is-48x48">
+			     	 			 	<img src="${data_path }/img/${boardDTO.img }" alt="작성자사진">
+			     	 			 </figure>
+			     	 		</div>	 
+			     			<div class="media-content">
+		              			<p class="title is-4" style="font-size:20px;">${replyDTO.id}</p>
+		              		</div>
+		             	</div>
+		            	<div class="content">
+			            	<p class="content1" >${replyDTO.comment1 }</p>
+		          	 	</div>
+		          	 	<div>
+			          	 	<c:if test="${boardDTO.id==loginUser.id}">
+			          	 	<!-- 0724김우주 -->
+			          	 		<a href="${path }/board/replyDel?rno=${replyDTO.rno}&no=${boardDTO.no}" class="button is-danger is-light">댓글삭제</a>
+			          	 	<!-- 0724김우주 -->
+			          	 	</c:if>
+		          	 	</div>
+	          		</div>	
+	        	 </div>
+	        </div>	 
+	     </c:forEach> 
+	   </div> 
+   <!-- 전재영0723 -->
+   
    <footer class="footer">
     <div class="content has-text-centered">
       <p>

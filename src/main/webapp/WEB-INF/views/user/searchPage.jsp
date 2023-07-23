@@ -16,22 +16,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="${data_path }/css/main.css">
-	<!-- 0720손승기 -->
-	<link rel="stylesheet" href="${data_path }/css/profile.css">
-	<!-- 0720손승기 -->
     <title>Document</title>
-    <style>
-    
-    </style>
 </head>
 <body>
 <c:import url="../header.jsp" />
-<div class="container">
-<div class="card-wrap">
+<div class="box">
   <article class="media">
     <div class="media-left">
-      <figure class="image is-128x128">
-        <img id="profile_img" src="${data_path }/upload/${userProfile[0].img }" alt="profileImage" style="">
+      <figure class="image is-64x64">
+        <img src="https://bulma.io/images/placeholders/128x128.png" alt="Image">
       </figure>
     </div>
     <div class="media-content">
@@ -46,14 +39,9 @@
       <div>
       	<a href="${path }/user/mypage">정보 수정</a>
       </div>
-    </div>
-  </article>
-      <!-- 0720 손승기 게시글이미지 영역 -->
-   <div class="card-wrap" id="board_wrap">
-      <c:forEach var="board" items="${userProfile}">
-         <a href="${path }/board/boarddetail?no=${board.no}"><img id="board_img" src="${data_path }/upload/${board.img1 }" alt="boardPreview"></a>
-      </c:forEach>      
-   </div>
+	<c:forEach var="board" items="${userProfile}">
+		<h2>${board.img1 }</h2>
+	</c:forEach>
       <nav class="level is-mobile">
         <div class="level-left">
           <a class="level-item" aria-label="reply">
@@ -73,10 +61,8 @@
           </a>
         </div>
       </nav>
-	<!-- 0720 손승기 게시글이미지 영역 -->
+    </div>
+  </article>
 </div>
-</div>
-<c:import url="../footer.jsp" />
-	
 </body>
 </html>

@@ -43,8 +43,8 @@
 				<div class="card">
 					<div class="card-image">
 						<figure class="image is-4by3">
-							<a href="${path }/board/boarddetail?no=${boardDTO.no}"><img
-								src="${data_path }/upload/${boardDTO.img1 }" alt="글사진"></a>
+							<a href="${path }/board/boarddetail?no=${boardDTO.no}">
+							<img class="obfit" src="${data_path }/upload/${boardDTO.img1 }" alt="글사진"></a>
 						</figure>
 					</div>
 					<div class="card-content">
@@ -63,7 +63,7 @@
 						<div class="field">
 						<strong class="reload_like${cnt.count }">좋아요 ${boardDTO.up } 명</strong>
 							<c:if test="${boardDTO.up > 0 }">
-							<span id="like_result${cnt.count }">  </span>
+							<p id="like_result${cnt.count }">  </p>
 								<script>
 	          			$.ajax({
 	          				type:"get",
@@ -84,14 +84,17 @@
 	          		</script>
 							</c:if>
 							<c:if test="${boardDTO.up == 0 }">
-							<span id="like_result${cnt.count }">  </span>
+							<p id="like_result${cnt.count }">  </p>
 							</c:if>
 						</div>
 						<div class="content">
 							<p class="content1">${boardDTO.content }</p>
-							<p style="color: blue;">#${boardDTO.hashtag }</p>
+							<p style="color: blue;">${boardDTO.hashtag }</p>
 							<time datetime="2016-1-1">${boardDTO.regdate }</time>
 						</div>
+						<!-- 0723전재영 -->
+							          <p>댓글수 : ${boardDTO.reply_cnt }</p>
+						<!-- 0723전재영 -->
 						<!-- 김우주0719 -->
 						<div class="field">
 							<c:choose>

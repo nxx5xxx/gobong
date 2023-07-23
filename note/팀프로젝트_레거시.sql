@@ -91,9 +91,11 @@ create table like1 (no number ,id varchar2(30) , upcheck number default 0 ,forei
 
 commit;
 
-
+-- 댓글 테이블 추가
+create table reply (rno number primary key, no number, id varchar2(30), comment1 varchar2(500),
+    foreign key(no) references board1(no), foreign key(id) references user1(id));
 ----------------------------------------------------------------------------------------------------
--- 셀렉트구문
+-- 테이블구문
 
 --유저
 select * from user1;
@@ -112,6 +114,18 @@ select * from board1;
 update board1 set up=up+1 where no=8;
 commit;
 desc board1;
+
+select * from board1 ;
+
+update board1 set hashtag='#구디스 #표인봉' where no=12;
+update board1 set hashtag='#태양열 #봉봉포도드링크' where no=11;
+commit;
+
+desc user1;
+
+select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate,b.up 
+    from user1 u , board1 b where u.id=b.id and lower(b.hashtag) Like lower('#%봉%') order by b.no desc;
+
 --좋아요
 
 select * from like1;
@@ -124,6 +138,9 @@ select * from like1 where no=2;
 -- 좋아요누른사람들 사진과 아이디 갖고오기
 select u.id as id, u.img from like1 l , user1 u where l.id = u.id and no=2;
 
+-- delete from like1 where no=2 and id='test1';
+select count(*) from like1 where no=2 and id='test1';
+delete from like1 where no=2 and id='test1';
 --------------------------------------------------------------------------------------------------------------
 --인서트구문
 --회원가입
@@ -171,14 +188,13 @@ commit;
 select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate from user1 u inner join board1 b on u.id=b.id order by b.no desc;
 select * from board1;
 
-create table reply (rno number primary key, no number, id varchar2(30), comment1 varchar2(500), foreign key(no) references board1(no), foreign key(id) references user1(id));
+
 commit;
-select * from like1;
-delete from like1 where no=2 and id='test1';
+
 select * from board1;
 select * from user1;
 commit;
-select count(*) from like1 where no=2 and id='test1';
 
-delete from like1 where no=2 and id='test1';
 commit;
+
+select * from reply;

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.gobong.domain.BoardDTO;
+import kr.gobong.domain.ReplyDTO;
 import kr.gobong.repository.BoardDAO;
 
 @Service
@@ -60,9 +61,6 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public void boardInsert(BoardDTO boardDTO) {
-		System.out.println("no" + boardDTO.getNo());
-		System.out.println("content" + boardDTO.getContent());
-		System.out.println("img1" + boardDTO.getImg1());
 		/* 김우주0719 */
 		System.out.println(boardNoGenerator());
 		boardDTO.setNo(boardNoGenerator()+1);
@@ -134,4 +132,20 @@ public class BoardServiceImpl implements BoardService {
 	/*//김우주0719 */
 	
 	/*//전재영0719 */
+	
+   //박지현,전재영
+   //상세페이지에서 댓글보기
+   @Override
+   public List<ReplyDTO> getReplyList(int no) {
+      List<ReplyDTO> replyList = boardDAO.getReplyList(no);
+      return replyList;
+   }
+   
+   /* 김우주0723 */
+   	@Override
+	public List<BoardDTO> getBoardListByHashtag(String hashtag) {
+		return boardDAO.getBoardListByHashtag(hashtag);
+		
+	}
+    /* 김우주0723 */
 }

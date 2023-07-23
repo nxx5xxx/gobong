@@ -13,15 +13,17 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.gobong.domain.BoardDTO;
 import kr.gobong.domain.UserDTO;
 import kr.gobong.domain.UserVO;
+import kr.gobong.service.BoardService;
 import kr.gobong.service.UserService;
 
 /* 0719김우주 */
@@ -32,6 +34,10 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	/* 0723김우주 */
+	@Autowired
+	private BoardService boardService;
+	/*//0723김우주 */
 	@Resource(name = "loginUser")
 	@Lazy
 	private UserDTO loginUser;
@@ -117,6 +123,8 @@ public class UserController {
 		}
 		
 		/*//김우주0720 */
+		
+		/*조태정 0721*/
 		//탈퇴
 		@GetMapping("/userDel")
 		public String userDel(@RequestParam("id") String id, Model model){
@@ -124,4 +132,35 @@ public class UserController {
 			model.addAttribute("id", id);
 			return "user/user_del";
 		}
+		
+		/* 김우주0723 해쉬태그인지 아닌지 수정했습니다	*/
+		@GetMapping("/searchUser")
+		public String searchUser(@RequestParam("id") String id, Model model) {
+			if(id.indexOf("#")==-1) {
+				List<UserVO> search = userService.searchUser(id);
+				List<UserVO> userProfile = userService.getUserProfile(id);
+				
+				model.addAttribute("userProfile", userProfile);
+				model.addAttribute("search", search);
+				model.addAttribute("id", id);
+				
+				return "user/searchPage";
+			}else {
+				String hashtag = "#%"+id.substring(1)+"%";
+				List<BoardDTO> boardSearchHashList = boardService.getBoardListByHashtag(hashtag);
+				model.addAttribute("boardList", boardSearchHashList);
+				return "board/board_list";
+			}
+		}
+		/*//김우주0723	*/
+		/*조태정 0721*/
+		
+		/* 김우주0723	*/
+		//아이디 중복체크
+		@GetMapping("/duplicationCheckId.do")
+		@ResponseBody
+		public int duplicationCheckId(@RequestParam String id) {
+			return userService.duplicationCheckId(id);
+		}
+		/* 김우주0723	*/
 }

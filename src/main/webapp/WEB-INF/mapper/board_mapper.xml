@@ -7,18 +7,19 @@
 	<select id="getBoardList" parameterType="java.lang.Integer"
 		resultType="kr.gobong.domain.BoardDTO">
 		<![CDATA[
-			select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate,b.up from user1 u inner join board1 b on u.id=b.id order by b.no desc
+			select b.no,u.name, b.id, u.img, b.content, b.img1, b.hashtag, b.regdate,b.up, (select count(*) from reply where no = b.no) as reply_cnt from user1 u inner join board1 b on u.id=b.id order by b.no desc
 		]]>
 	</select>
-	<!-- 글 등록 -->
+	<!-- 이재호0721 -->
 	<insert id="boardInsert"
 		parameterType="kr.gobong.domain.BoardDTO">
 	 	<![CDATA[
 	 	insert into board1 values(#{no},#{id},#{content},#{hashtag},
 	 	default,default,#{img1,jdbcType=NULL},#{img2,jdbcType=NULL},
-	 	#{img3,jdbcType=NULL},default)
+	 	#{img3,jdbcType=NULL},#{prv})
 	 	]]>
 	</insert>
+	<!-- //이재호0721 -->
 	
 	<!-- 0719 조태정 글 삭제 -->
 	 <delete id="boardDel" parameterType="kr.gobong.domain.BoardDTO" >
