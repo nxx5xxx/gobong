@@ -28,6 +28,20 @@
 		]]>
 	</delete>
 	<!--  //0721 이재호 -->
-
-
+	
+	<!-- 0724김우주 -->
+	<!-- 글삭제시 댓글비워주기 -->
+	<delete id="deleteReplyForBoard" parameterType="java.lang.Integer">
+		<![CDATA[
+			delete from reply where no=#{no}
+		]]>
+	</delete>
+	
+	<!-- 댓글목록 자동화 -->
+	<select id="getReplyRno" resultType="java.lang.Integer">
+      <![CDATA[
+         select rno from reply order by rno desc
+      ]]>
+	</select>
+	<!-- //0724김우주 -->
 </mapper>	 

@@ -6,8 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!-- 최상위경로 -->
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<c:set var="data_path"
-	value="${pageContext.request.contextPath }/resources" />
+<c:set var="data_path" value="${pageContext.request.contextPath }/resources" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -20,8 +19,9 @@
 <link
 	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap"
 	rel="stylesheet">
-<title>글 목록 보기</title>
-<link rel="stylesheet" href="${data_path }/css/main.css">
+	<title>글 목록 보기</title>
+	<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/footer.css">
 <style>
 .content .content1 {
 	width: 750px;
@@ -59,61 +59,63 @@
 								<p class="subtitle is-6">${boardDTO.id}</p>
 							</div>
 						</div>
-				<!-- 김우주0721 -->
-						<div class="field">
-						<strong class="reload_like${cnt.count }">좋아요 ${boardDTO.up } 명</strong>
-							<c:if test="${boardDTO.up > 0 }">
-							<p id="like_result${cnt.count }">  </p>
-								<script>
-	          			$.ajax({
-	          				type:"get",
-	          				dataType : "json",
-	          				url:"${path}/like/likeList.do",
-							encType:"UTF-8",
-	          				data: {no:${boardDTO.no}},
-	          				success : function(likeList){
-	          					for(var i=0 in likeList){
-	                                $("#like_result${cnt.count }").append("<a id='like_a"+${cnt.count}+"_"+likeList[i].id+"' href=''>"+likeList[i].id+"</a>"+"  ");
-	                            }
-	          				},
-	          				error : function(){
-	          					alert(${boardDTO.no}+"에러");
-	          				}
-	          			});
-
-	          		</script>
-							</c:if>
-							<c:if test="${boardDTO.up == 0 }">
-							<p id="like_result${cnt.count }">  </p>
-							</c:if>
-						</div>
 						<div class="content">
 							<p class="content1">${boardDTO.content }</p>
 							<p style="color: blue;">${boardDTO.hashtag }</p>
 							<time datetime="2016-1-1">${boardDTO.regdate }</time>
 						</div>
-						<!-- 0723전재영 -->
-							          <p>댓글수 : ${boardDTO.reply_cnt }</p>
-						<!-- 0723전재영 -->
+
 						<!-- 김우주0719 -->
 						<div class="field">
-							<c:choose>
-								<c:when test="${loginUser.userLogin == true }">
-									<input type="button" value="좋아요"
-										onclick="like_check(${boardDTO.up },${boardDTO.no },'${loginUser.id }',${cnt.count })" />
-								</c:when>
-								<c:otherwise>
-									<input type="button" value="좋아요" onclick="goClick()" />
-								</c:otherwise>
-							</c:choose>
+							<div style="float:left;">
+									<c:choose>
+										<c:when test="${loginUser.userLogin == true }">
+												<input type="image" src="${data_path}/img/heart.png" onclick="like_check(${boardDTO.up },${boardDTO.no },'${loginUser.id }',${cnt.count })" />
+										</c:when>
+										<c:otherwise>
+												<input type="image" src="${data_path}/img/heart.png" onclick="goClick()"/>			
+										</c:otherwise>
+									</c:choose>	
+							    <strong class="reload_like${cnt.count }" >${boardDTO.up }</strong>
+								<c:if test="${boardDTO.up > 0 }">
+								<p id="like_result${cnt.count }"></p>
+									<script>
+					          			$.ajax({
+					          				type:"get",
+					          				dataType : "json",
+					          				url:"${path}/like/likeList.do",
+											encType:"UTF-8",
+					          				data: {no:${boardDTO.no}},
+					          				success : function(likeList){
+					          					for(var i=0 in likeList){
+					                                $("#like_result${cnt.count }").append("<a id='like_a"+${cnt.count}+"_"+likeList[i].id+"' href=''>"+likeList[i].id+"</a>"+"  ");
+					                            }
+					          				},
+					          				error : function(){
+					          					alert(${boardDTO.no}+"에러");
+					          				}
+					          			});
+		          				</script>
+								</c:if>
+								<c:if test="${boardDTO.up == 0 }">
+								<p id="like_result${cnt.count }">  </p>
+								</c:if>
+							</div>
+							<div style="padding-left:65px;">
+								<!-- 0723전재영 -->
+									<img src="${data_path}/img/reply.png">
+									<strong> ${boardDTO.reply_cnt }</strong>
+								<!-- 0723전재영 -->
 							<!-- 0720김우주 -->
-							<c:if test="${boardDTO.id==loginUser.id}">
-								<a href="${path }/board/boardMod?no=${boardDTO.no}"
-									class="button is-success is-light">수정</a>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="${path }/board/boardDel?no=${boardDTO.no}"
-									class="button is-danger is-light">삭제</a>
-							</c:if>
+								<span style="float:right;">
+									<c:if test="${boardDTO.id==loginUser.id}">
+								<!-- 0724박지현 -->
+								<a href="${path }/board/boardEdit?no=${boardDTO.no}" class="button is-success is-light">수정</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<!-- 0724박지현 -->
+                  						<a href="${path }/board/boardDel?no=${boardDTO.no}" class="button is-danger is-light">삭제</a>
+									</c:if>
+								</span>
+							</div>
 						</div>
 						<!-- //김우주0721 -->
 					</div>
@@ -150,7 +152,7 @@
 							data: {no:no},
 							//async: false
 							complete:function(){
-								$("#like_result"+cnt).append("<a href=''>"+id+"</a>"+"  ");
+								$("#like_result"+cnt).append("<a href='' id='like_a"+cnt+"_"+id+"'>"+id+"</a>"+"  ");
 								$('.reload_like'+cnt).load(location.href+' .reload_like'+cnt);
 							}
 		          		}); 
@@ -174,17 +176,6 @@
 	          	}
 	          </script>
 	     <!-- //김우주0722 -->
-	<footer class="footer">
-		<div class="content has-text-centered">
-			<p>
-				<strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy
-					Thomas</a>. The source code is licensed <a
-					href="http://opensource.org/licenses/mit-license.php">MIT</a>. The
-				website content is licensed <a
-					href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY
-					NC SA 4.0</a>.
-			</p>
-		</div>
-	</footer>
+<c:import url="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

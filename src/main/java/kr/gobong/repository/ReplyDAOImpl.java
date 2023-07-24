@@ -29,5 +29,17 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	}
 
+	/* 0724김우주 */
+	//글삭제시 댓글비워주기
+	@Override
+	public void deleteReplyForBoard(int no) {
+		sqlSessionTemplate.delete("reply.deleteReplyForBoard", no);
+	}
+	//댓글 번호 자동화
+	@Override
+	public List<Integer> getReplyRno() {
+		return sqlSessionTemplate.selectList("reply.getReplyRno");
+	}
+	/* 0724김우주 */
 
 }

@@ -14,6 +14,11 @@ public interface ReplyDAO {
 	//댓글 삭제
 	public void deleteReply(int rno);
 
-
+	/* 0724김우주 */
+	//글삭제시 댓글비워주기
+	public void deleteReplyForBoard(int no);
+	//댓글 번호 자동화
+	public List<Integer> getReplyRno();
+	/* 0724김우주 */
 	
 }

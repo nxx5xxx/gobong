@@ -34,12 +34,15 @@ public class BoardServiceImpl implements BoardService {
 	
 	/* 김우주0719 */
 	private int boardNoGenerator() {
-		List<BoardDTO> boardList = boardDAO.getBoardList();
-		if(boardList.size()==0) {
+	   	/* 김우주0724 */
+		System.out.println(boardDAO.getReplyNo());
+	   	
+		if(boardDAO.getReplyNo()==0) {
 			return 0;
 		}else {
-			return boardList.get(0).getNo();
+			return boardDAO.getReplyNo();
 		}
+		/* 김우주0724 */
 	}
 	//재호씨 boardInsert에 연계됩니다
 	//각주 달아놓은거 참고해주세요

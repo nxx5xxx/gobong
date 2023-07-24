@@ -43,8 +43,8 @@
 				<div class="card">
 					<div class="card-image">
 						<figure class="image is-4by3">
-							<a href="${path }/board/boarddetail?no=${boardDTO.no}"><img
-								src="${data_path }/upload/${boardDTO.img1 }" alt="글사진"></a>
+							<a href="${path }/board/boarddetail?no=${boardDTO.no}">
+							<img class="obfit" src="${data_path }/upload/${boardDTO.img1 }" alt="글사진"></a>
 						</figure>
 					</div>
 					<div class="card-content">
@@ -59,30 +59,22 @@
 								<p class="subtitle is-6">${boardDTO.id}</p>
 							</div>
 						</div>
+				<!-- 김우주0721 -->
 						<div class="field">
-							<strong>좋아요</strong>
-							<c:if test="${boardDTO.up > 0 }">${boardDTO.up }
-	          		<span id="like_result${cnt.count }">여기 </span>
+						<strong class="reload_like${cnt.count }">좋아요 ${boardDTO.up } 명</strong>
+							<c:if test="${boardDTO.up > 0 }">
+							<p id="like_result${cnt.count }">  </p>
 								<script>
 	          			$.ajax({
 	          				type:"get",
+	          				dataType : "json",
 	          				url:"${path}/like/likeList.do",
 							encType:"UTF-8",
 	          				data: {no:${boardDTO.no}},
-	          				success : function(list){
-	          					$(list).each(function(index,el){
-	          						let likes = this.querySelectorAll('id');
-	          						let tmplikes;
-		          						for(let i=0; i<likes.length;i++){
-		          							console.log(i);
-		          							console.log(likes[i]);
-		          							$("id").before("<a href=''>");
-		          							tmplikes = likes[i];
-		          							$("#like_result${cnt.count }").append(tmplikes);
-		          						 	//$("#like_result${cnt.count }").append(likes[i]);
-			          						$("id").after("</a>");
-		          						}
-	          					});
+	          				success : function(likeList){
+	          					for(var i=0 in likeList){
+	                                $("#like_result${cnt.count }").append("<a id='like_a"+${cnt.count}+"_"+likeList[i].id+"' href=''>"+likeList[i].id+"</a>"+"  ");
+	                            }
 	          				},
 	          				error : function(){
 	          					alert(${boardDTO.no}+"에러");
@@ -91,18 +83,24 @@
 
 	          		</script>
 							</c:if>
+							<c:if test="${boardDTO.up == 0 }">
+							<p id="like_result${cnt.count }">  </p>
+							</c:if>
 						</div>
 						<div class="content">
 							<p class="content1">${boardDTO.content }</p>
-							<p style="color: blue;">#${boardDTO.hashtag }</p>
+							<p style="color: blue;">${boardDTO.hashtag }</p>
 							<time datetime="2016-1-1">${boardDTO.regdate }</time>
 						</div>
+						<!-- 0723전재영 -->
+							          <p>댓글수 : ${boardDTO.reply_cnt }</p>
+						<!-- 0723전재영 -->
 						<!-- 김우주0719 -->
 						<div class="field">
 							<c:choose>
 								<c:when test="${loginUser.userLogin == true }">
 									<input type="button" value="좋아요"
-										onclick="like_check(${boardDTO.up },${boardDTO.no })" />
+										onclick="like_check(${boardDTO.up },${boardDTO.no },'${loginUser.id }',${cnt.count })" />
 								</c:when>
 								<c:otherwise>
 									<input type="button" value="좋아요" onclick="goClick()" />
@@ -116,30 +114,66 @@
 					<a href="${path }/board/boardDel?no=${boardDTO.no}"
 									class="button is-danger is-light">삭제</a>
 							</c:if>
-							<!-- //0720김우주 -->
 						</div>
-
-						<!-- //김우주0719 -->
+						<!-- //김우주0721 -->
 					</div>
 				</div>
 			</div>
 		</c:forEach>
 	</div>
+	<!-- 김우주0722 -->
 	<script>
-	          	function like_check(like,no){
-	          		
-	          		alert('글번호' + no);
-	          		alert('현재좋아요수' + like);
- 	          		$.ajax({
- 						type:"get",
-						url:"${path}/like/upLike.do",
-						dataType:"json",
-						encType:"UTF-8",
-						data: {no:no},
-						//async: false
+	          	function like_check(like,no,id,cnt){
+	          		let chk_sw;
+	          		$.ajax({
+	          			type:"get",
+	          			url:"${path}/like/likeCheck.do",
+	          			dataType:"json",
+	          			encType:"UTF-8",
+	          			async:false,
+	          			data:{no:no , id:id},
+	          			success : function(likeCheck){
+	          				chk_sw=likeCheck;
+	          			},
+	          			error : function(){
+	          				alert("like_check 에러");
+	          				
+	          			}
 	          		});
+
+		          	if(chk_sw === 0){
+ 	 	          		$.ajax({
+	 						type:"get",
+							url:"${path}/like/upLike.do",
+							dataType:"json",
+							encType:"UTF-8",
+							data: {no:no},
+							//async: false
+							complete:function(){
+								$("#like_result"+cnt).append("<a href='' id='like_a"+cnt+"_"+id+"'>"+id+"</a>"+"  ");
+								$('.reload_like'+cnt).load(location.href+' .reload_like'+cnt);
+							}
+		          		}); 
+ 	 	          		alert("좋아요를 눌렀습니다");
+		          	}else{
+		          		if(confirm('좋아요를 취소하시겠습니까')){
+		          			$.ajax({
+		          				type:"get",
+		          				url:"${path}/like/disLike.do",
+		          				async:false,
+		          				data:{no:no,id:id},
+		          				complete:function(){
+		          					$("#like_a"+cnt+"_"+id).remove();
+		          					$('.reload_like'+cnt).load(location.href+' .reload_like'+cnt);
+		          				}
+		          			});
+		          			alert('취소하였습니다.');
+		          			//좋아요취소
+		          		}
+		          	}
 	          	}
 	          </script>
+	     <!-- //김우주0722 -->
 	<footer class="footer">
 		<div class="content has-text-centered">
 			<p>

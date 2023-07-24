@@ -3,8 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <c:set var="path1" value="${pageContext.request.contextPath }" />
-<c:set var="data_path1"
-	value="${pageContext.request.contextPath }/resources" />
+<c:set var="data_path1" value="${pageContext.request.contextPath }/resources" />
 <!-- 김우주0719 -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"
 	integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
@@ -23,11 +22,12 @@ span {
 span:hover {
 	cursor: pointer;
 }
+
+.navbar { margin-top: 25px; font-size: 17px; font-weight: 600; }
 </style>
 <nav class="navbar" role="navigation" aria-label="main navigation">
 	<div class="navbar-brand">
-		<a class="navbar-item" href="${path1 }/"><img class="logo"
-			src="${data_path1 }/img/logo.jpg" alt="Logo"></a>
+		<a class="navbar-item" href="${path1 }/"><img class="logo" src="${data_path1 }/img/logo.jpg" alt="Logo"></a>
 	</div>
 	<div id="navbarBasicExample" class="navbar-menu">
 		<div class="navbar-start">
@@ -75,7 +75,10 @@ span:hover {
 						<div class="navbar-item has-dropdown is-hoverable">
 							<a class="navbar-link">My Page</a>
 							<div class="navbar-dropdown">
-								<a class="navbar-item" href="like_list">좋아요 ♥</a>
+								<!-- 0724이재호 -->			
+								<a class="navbar-item" href="${path1 }/user/myLikeList">😻♥</a>
+								<a class="navbar-item" href="${path1 }/user/ ">내가 쓴 댓글</a>
+								<!-- //0724 이재호 -->
 								<!-- 0719 손승기 -->
 								<a href="${path1 }/user/profile?id=${loginUser.id}"
 									class="navbar-item"><img src="">프로필</a> <a
@@ -89,7 +92,7 @@ span:hover {
 							<div class="buttons">
 								<button type="button" class="button is-warning is-hovered"
 									onclick="goClick()">
-									<strong>Let's Gobong !</strong>
+									<strong>Let's Gobong</strong>
 								</button>
 							</div>
 						</div>
@@ -190,3 +193,4 @@ $(window).scroll(function(){
 	document.querySelector('#hello').style.display = 'none';
   });
 </script>
+<hr>

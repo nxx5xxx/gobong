@@ -17,7 +17,7 @@
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous" ></script>
 	<!-- 0723김우주 -->
 	<style>
-	.er {color:red; display:none}
+	.er {display:none}
 	</style>
 	<!-- 0723김우주 -->
 </head>
@@ -27,8 +27,8 @@
 	$(function(){
 		let id_errors = document.getElementById('id.errors');
 		let name_errors = document.getElementById('name.errors'),
- 			pw_errors = document.getElementById('pw.errors');
- 			//email_errors = document.getElementById('email.errors').innerText,
+ 			pw_errors = document.getElementById('pw.errors'),
+ 			email_errors = document.getElementById('email.errors');
 			//tel_errors = document.getElementById('tel.errors').innerText;
  		if(id_errors!=null){
 			$("#id").attr("placeholder",id_errors.innerText);
@@ -45,6 +45,12 @@
  		if(pw_errors!=null){
 			$("#pw").attr("placeholder",pw_errors.innerText);
 		}
+		if(email_errors!=null){
+			$("#email").attr("placeholder",email_errors.innerText);
+			if($("#email").val()!=null){
+				$("#email").val("");
+			}
+		}
 
 	});
 </script>
@@ -55,7 +61,7 @@
 		<div class="col-sm-6">
 			<div class="card shadow">
 				<div class="card-body">
-					<form:form action="${path1 }/user/join_procedure" method="post" modelAttribute="joinUserDto" class="box">
+					<form:form action="${path1 }/user/join_procedure" method="post" modelAttribute="joinUserDto" class="box" >
 					<%-- <form:hidden path="userIdExist" /> --%>
 						<div class="field">
 							<form:label path="id" class="label">아이디</form:label>
@@ -109,7 +115,7 @@
 	<!-- 0723김우주 -->
 	<script>
 	function duplicationCheckId(){
-		if($("#id").val().length>0){
+		if($("#id").val().length>3){
 			let idCheck = 1;
 			$.ajax({
 				encType:"UTF-8",
@@ -118,7 +124,6 @@
 				data:{id:$("#id").val()},
 				async:false,
 				success: function(result){
-					alert(result);
 					idCheck = result;
 				},
 				error : function(){
@@ -130,12 +135,17 @@
 			}else{
 				if(confirm('사용가능한 아이디입니다 사용하시겠습니까')){
 					//예
-					$("#id").attr("disabled",true);
-					$("#idChkBtn").attr("style","display:none");
+					/* 0724김우주 */
+					$("#id").attr("readonly",true);
+					$("#idChkBtn").attr("style","display:none;");
+					$("#id").attr("style","background-color:#f5f5f5;");
+					/* 0724김우주 */
 				}else{
 					//아니오
 				}
 			}
+		}else if($("#id").val().length>0){
+			alert('아이디는 4~20글자 사이로 입력해주셔야 합니다');
 		}else{
 			alert('아이디를 입력해주시기 바랍니다');
 		}
@@ -143,6 +153,7 @@
 	
 	</script>
 	<!-- 0723김우주 -->
+
 </div>
 </body>
 </html>

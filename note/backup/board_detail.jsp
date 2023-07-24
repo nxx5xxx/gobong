@@ -15,22 +15,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
-  <title>글 목록 보기</title>
+  <title>글 상세 보기</title>
 	<link rel="stylesheet" href="${data_path }/css/main.css">
-  <style>
-  	.content .content1 { width: 750px;  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  	.card {margin-bottom:40px;}
-  </style>	
 </head>
 <body>
 <c:import url="/WEB-INF/views/header.jsp" />
   <div class="container">
-  	<c:forEach items="${boardList}" var="boardDTO">
 	    <div class="card-wrap">
 	      <div class="card">
 	        <div class="card-image">
 	          <figure class="image is-4by3">
-	            <img src="${data_path }/upload/${boardDTO.img1 }" alt="글사진">
+	          <input type="hidden" name="no" value="${boardDTO.no }" />
+	            <img src="${data_path }/upload/${boardDTO.img1 }" alt="글사진1">
+	            <!-- 슬라이드 이미지로 바꿔야돼요 -->
+	            <%-- <img src="${data_path }/upload/${boardDTO.img2 }" alt="글사진2">
+	            <img src="${data_path }/upload/${boardDTO.img3 }" alt="글사진3"> --%>
 	          </figure>
 	        </div>
 	        <div class="card-content">
@@ -46,24 +45,54 @@
 	            </div>
 	          </div>
 	          <div class="content">
-	          	<p class="contentName">내용</p>
 	            <p class="content1">${boardDTO.content }</p>
-	            <p style="color: blue;">#${boardDTO.hashtag }</p>
+	            <p>${boardDTO.hashtag }</p>
 	            <time datetime="2016-1-1">${boardDTO.regdate }</time>
-	            <br><br>
-	            <!-- 작성자/관리자만 보이게 변경하기 -->
-		        <div class="field">
-		        	<p style="display: none;">${boardDTO.no }</p>
-					<a href="${path }/board/boardMod?no=${boardDTO.no}" class="button is-success is-light">수정</a>
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<a href="${path }/board/boardDel?no=${boardDTO.no}" class="button is-danger is-light">삭제</a>
-				</div>
 	          </div>
+             <div style="align:center;">
+                <c:if test="${boardDTO.id==loginUser.id}">
+                   <a href="${path }/board/boardEdit?no=${boardDTO.no}" class="button is-success is-light">수정</a>
+                   <a href="${path }/board/boardDel?no=${boardDTO.no}" class="button is-danger is-light">삭제</a>
+                </c:if>   
+                   <a href="${path }/board/replyInsert?no=${boardDTO.no}" class="button is-warning is-light">댓글</a>   
+             </div>
 	        </div>
 	      </div>
 	     </div>
-	  </c:forEach> 
    </div>
+   <!-- 전재영0723 -->
+   <div class="container1" style="padding-top:40px;"> 
+	     <c:forEach items="${replyList}" var="replyDTO" varStatus="cnt">
+	     	<div class="card-wrap">
+	     		<div class="card">
+			     	 <div class="card-content">
+			     	 	<div class="media">
+			     			<div class="media-left">
+			     	 			<figure class="image is-48x48">
+			     	 			 	<img src="${data_path }/img/${boardDTO.img }" alt="작성자사진">
+			     	 			 </figure>
+			     	 		</div>	 
+			     			<div class="media-content">
+		              			<p class="title is-4" style="font-size:20px;">${replyDTO.id}</p>
+		              		</div>
+		             	</div>
+		            	<div class="content">
+			            	<p class="content1" >${replyDTO.comment1 }</p>
+		          	 	</div>
+		          	 	<div>
+			          	 	<c:if test="${boardDTO.id==loginUser.id}">
+			          	 	<!-- 0724김우주 -->
+			          	 		<a href="${path }/board/replyDel?rno=${replyDTO.rno}&no=${boardDTO.no}" class="button is-danger is-light">댓글삭제</a>
+			          	 	<!-- 0724김우주 -->
+			          	 	</c:if>
+		          	 	</div>
+	          		</div>	
+	        	 </div>
+	        </div>	 
+	     </c:forEach> 
+	   </div> 
+   <!-- 전재영0723 -->
+   
    <footer class="footer">
     <div class="content has-text-centered">
       <p>

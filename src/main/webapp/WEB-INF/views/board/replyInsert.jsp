@@ -18,8 +18,8 @@
    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap"
    rel="stylesheet">
 <title>댓글 작성</title>
-<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/footer.css">
 <style>
 .warap {
    width: 800px;
@@ -28,7 +28,7 @@
 </style>
 </head>
 <body>
-   <c:import url="/WEB-INF/views/header.jsp" />
+	<c:import url="/WEB-INF/views/header.jsp" />
    <div class="warap">
       <h1 style="text-align: center; font-size: 30px;">댓글 작성</h1>
       <br>
@@ -37,10 +37,8 @@
          enctype="multipart/form-data">
          <div class="field">
          	<input type="hidden" name="no" value="${no }">
-         	<form:label path="rno">댓글고유번호</form:label>
-         	<form:input path="rno" class="input" />
-            <form:label path="id">${replyDto.id }아이디</form:label>
-            <form:input path="id" class="input" value="${loginUser.id }"/>
+         	<!-- 0724김우주 여기있던 세줄 삭제 -->
+            <form:input type="hidden" path="id" class="input" value="${loginUser.id }"/>
          </div>
          <br>
          <div class="field">
@@ -59,16 +57,6 @@
       </form:form>
    </div>
    <br>
-   <footer class="footer">
-      <div class="content has-text-centered">
-         <p>
-            <a href="test/home">테스트로 이동</a> <a
-               href="http://opensource.org/licenses/mit-license.php">MIT</a>. The
-            website content is licensed <a
-               href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY
-               NC SA 4.0</a>.
-         </p>
-      </div>
-   </footer>
+<c:import url="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

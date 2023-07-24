@@ -15,17 +15,13 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="${data_path }/css/main.css">
-	<!-- 0720손승기 -->
-	<link rel="stylesheet" href="${data_path }/css/profile.css">
-	<!-- 0720손승기 -->
     <title>Document</title>
-    <style>
-    
-    </style>
+    <link rel="stylesheet" href="${data_path }/css/profile.css">
+	<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/footer.css">
 </head>
 <body>
-<c:import url="../header.jsp" />
+<c:import url="/WEB-INF/views/header.jsp" />
 <div class="container">
 <div class="card-wrap">
   <article class="media">
@@ -76,7 +72,7 @@
 	<!-- 0720 손승기 게시글이미지 영역 -->
 </div>
 </div>
-<c:import url="../footer.jsp" />
+<c:import url="/WEB-INF/views/footer.jsp" />
 	
 </body>
 </html>

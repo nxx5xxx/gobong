@@ -19,13 +19,24 @@ public class ReplyServiceImpl implements ReplyService {
 	@Autowired
 	BoardDAO boardDAO;
 
-
+	/* 0724김우주 */
+	//댓글번호 자동화
+	private int replyRNoGenerator() {
+		List<Integer> replyList = replyDAO.getReplyRno();
+		if(replyList.size()==0) {
+			return 0;
+		}else {
+			return replyList.get(0);
+		}
+	}
 	
 	//이재호0721
 	@Override
 	public void addReply(ReplyDTO replyDTO) {
+		replyDTO.setRno(replyRNoGenerator()+1);
 		replyDAO.addReply(replyDTO);
 	}
+	/* 0724김우주 */
 
 	@Override
 	public void deleteReply(int rno) {
@@ -33,4 +44,10 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 //이재호0721
+	
+	/* 0724김우주 */
+	//글삭제시 댓글비워주기
+	public void deleteReplyForBoard(int no) {
+		replyDAO.deleteReplyForBoard(no);
+	}
 }

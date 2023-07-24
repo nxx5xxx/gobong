@@ -18,8 +18,8 @@
 	href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap"
 	rel="stylesheet">
 <title>Document</title>
-<link href="/resources/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/main.css">
+	<link rel="stylesheet" href="${data_path }/css/footer.css">
 <style>
 .warap {
 	width: 800px;
@@ -122,16 +122,6 @@
 		</form:form>
 	</div>
 	<br>
-	<footer class="footer">
-		<div class="content has-text-centered">
-			<p>
-				<a href="test/home">테스트로 이동</a> <a
-					href="http://opensource.org/licenses/mit-license.php">MIT</a>. The
-				website content is licensed <a
-					href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY
-					NC SA 4.0</a>.
-			</p>
-		</div>
-	</footer>
+<c:import url="/WEB-INF/views/footer.jsp" />
 </body>
 </html>

@@ -1,5 +1,10 @@
 @charset "UTF-8";
-<!-- profile.jsp 스타일 -->
+/* profile.jsp 스타일 */
+/* 0725김우주 */
+.container {
+	min-height:520px
+}
+
 .image {
 	height:160px; 
 	width:160px;
@@ -26,12 +31,7 @@
 	box-sizing:border-box; 
 }
 
-.footer { 
-	position:absolute; 
-	bottom:0; 
-	width:100%; 
-}
-
 #profile_img {
 	width:128px; height:128px;
 }
+/* 0725김우주 */

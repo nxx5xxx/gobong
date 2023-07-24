@@ -69,4 +69,10 @@ public class BoardDAOImpl implements BoardDAO {
 		return sqlSessionTemplate.selectList("user1.getBoardListByHashtag", hashtag);
 	}
 	/* 김우주0723 */
+   	/* 김우주0724 */
+	@Override
+	public int getReplyNo() {
+		return sqlSessionTemplate.selectOne("board1.getReplyNo");
+	}
+   	/*//김우주0724 */
 }

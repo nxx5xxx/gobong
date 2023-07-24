@@ -489,10 +489,188 @@ alter table board1 drop column upcheck;
 	모든전역변수에 이닛바인더가 먹히게되어 수정하였습니다
 	
 
--- 기능추가해야할사항
+-- 자고일어나서 기능추가해야할사항
+팔로우기능 - 손승기완료
+비밀번호 , 비밀번호확인 유효성검사 6)
+댓글 번호 자동화 7)
+댓글 글쓴이 자동화 8)
+유효성검사 문구 더 매끄럽게 9)
+관리자페지이 10)
+글삭제시 댓글있으면 삭제가안됨 - 5)
 
-댓글 번호 자동화 , 댓글 글쓴이 자동화
-비밀번호 , 비밀번호확인 유효성검사
-유효성검사 문구 더 매끄럽게
-관리자페지이
+5)
+	 글삭제시 댓글비워주기 추가
+	reply_mapper.xml 32번째줄
 
+	
+5-2)
+	Reply-DAO,DAOImpl,Service,ServiceImpl 구문 추가
+
+5-3)
+	BoardController.java
+	89번째줄 추가
+	
+6)
+	비밀번호 , 비밀번호확인 유효성검사
+
+6-1)
+	UserCustomValidator 추가
+	
+6-2)
+	UserController.java
+	170번째줄
+	
+6-3)
+	custom_vali.properties
+	4,5번째 줄 추가
+	
+6-4)
+	수정페이지에서발리데이션 적용
+	UserController.java
+	92번째줄 수정
+	
+7)
+	댓글번호 자동화
+	
+7-1)
+	reply_mapper.xml
+	40번째줄 추가
+	
+7-2)
+	ReplyDAO
+	20번째줄
+	ReplyDAOImpl
+	38번째줄
+	ReplyServiceImpl
+	22~39줄
+7-3)
+	view딴
+	replyInsert.jsp
+	40번째줄
+	
+8)
+	댓글 글쓴이 자동화
+	replyInsert.jsp
+	41번째줄
+	<form:input type="hidden" path="id" class="input" value="${loginUser.id }"/>
+	으로 수정
+	
+9)
+	유효성 검사 수정
+9-1)
+	custom_vali.properties 수정
+	
+9-2)
+	UserDTO.java
+	28, 29번째줄
+	@NotBlank
+	@Email
+	추가
+	
+9-3)
+	join.jsp
+	31,48번째 줄 수정
+	127번째줄		alert(result); 삭제
+	
+10)
+	UserCustomValidator.java
+	19번째줄 이퀄스로 수정
+	
+11)
+	회원가입 안되던버그 수정
+	join.jsp
+	138~142번째줄 수정
+	
+12)
+	전체글 보기에서는 전체공개 글만 볼수 있도록 수정
+	
+13)
+	글번호 자동화 따로추가
+	board_mapper.xml
+	5번째줄 주석참조
+	
+13-2)
+	BoardDAO,BoardDAOImpl 0724김우주 주석
+	BoardService 37번째줄 수정
+
+14)
+	친구 글 보기에는
+	팔로우한 친구 글만 (친구공개 및 전체공개글) 볼 수 있도록 수정
+	board_mapper.xml
+	44번째줄 수정
+	
+15)
+	조태정씨 파일 합치기
+	
+16) 
+	전재영씨 파일합치기
+	-리소스폴더내 이미지
+	
+17)
+	board_list 원본 백업
+	원본에서 153번째줄 수정
+
+18)
+	박지현씨 파일합치기
+	
+19)
+	이재호씨 파일합치기
+	
+20)
+	board_detail.jsp
+	댓글등록부분 ajax로 추가
+	
+21)
+	board_detail.jsp
+	댓글 창 위치 변경및 디자인 변경
+	
+22)
+	board_detail.jsp
+	댓글 등록시 새로고침없도록 수정함
+	
+23)
+	board_detail.jsp
+	댓글 최대 글자수(Oracle db내 varchar2(500)이므로)
+	를 넘으면 메세지가 가도록 설정
+
+#### board_detail.jsp 위치와 변경점이 너무많고
+	저녁에 작업한거라 따로 주석처리를 하지않았습니다
+
+24)
+	profile.css
+	29번째줄
+	footer 부분 주석처리
+
+25)	
+	a태그 span태그등등을 스타일로 묶어버린거 빼내는작업중
+-------------------------------------------
+
+
+
+--0725
+1)
+	모든 jsp영역에 footer와 css header를 달았습니다
+	
+2)
+	profile.css 수정
+	통복붙하세요
+	
+3)
+	친구글 목록보기를 따로 페이지만드는거 비효율적이라페이지는 하나에서 보이도록 합쳤습니다
+	
+3-1)
+	board_mapper.xml
+	45번째줄 수정
+	
+3-2)
+	보드컨트롤러 105번째줄
+	return값
+			return "board/board_list"; 로 수정
+			
+3-3)
+	board_friendlist.jsp
+	백업폴더로 옮김
+	
+4)
+	login.jsp 백업폴더로 옮겼습니다
+	

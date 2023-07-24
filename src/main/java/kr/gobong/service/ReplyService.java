@@ -1,7 +1,5 @@
 package kr.gobong.service;
 
-import java.util.List;
-
 import kr.gobong.domain.ReplyDTO;
 
 public interface ReplyService {
@@ -13,5 +11,9 @@ public interface ReplyService {
 
 	// 댓글 삭제
 	public void deleteReply(int rno);
-
+	
+	/* 0724김우주 */
+	//글삭제시 댓글비워주기
+	public void deleteReplyForBoard(int no);
+	/* 0724김우주 */
 }

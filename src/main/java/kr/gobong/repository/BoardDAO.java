@@ -31,4 +31,7 @@ public interface BoardDAO {
    /* 김우주0723 */
    public List<BoardDTO> getBoardListByHashtag(String hashtag);
    /*//김우주0723 */
+   	/* 김우주0724 */
+	public int getReplyNo();
+	/*//김우주0724 */
 }
