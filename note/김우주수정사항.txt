@@ -674,3 +674,96 @@ alter table board1 drop column upcheck;
 4)
 	login.jsp 백업폴더로 옮겼습니다
 	
+5)
+	board_detail.jsp 스타일수정
+	
+6)
+	board_edit.jsp
+	버그수정
+	
+7)
+	승기씨 파일 합침
+	
+8)
+	board_detail.jsp
+	스크립트 및 div태그 내 수정
+	
+9)
+	재호씨 파일합치기
+	, reply_mapper.xml 구문수정
+	
+10)
+	게시글 없는 사람은 프로필 조회 안 됨 수정
+	
+10-1)
+	search_mapper.xml
+	9번줄 구문수정
+	
+10-2)
+	searchPage.jsp
+	수정
+	
+11)
+	승기씨 프로필수정 합침
+	
+12)
+	댓글쓰기페이지 활용
+	board_list.jsp
+	133번째줄 85번째줄
+	로그인안됏을때 안되도록도 함
+	
+13)
+	board_list.jsp
+	77번째줄
+	db ||CHR(13)||CHR(10)|| 먹히도록 수정
+	
+14)
+	회원탈퇴시 자신이 작성한 모든테이블을 제거후 탈퇴
+	
+	모든댓글삭제
+	모든 좋아요 삭제
+	글 들의 번호들을 리스트로 불러와서 순회시키며 삭제
+	해당 게시글의 모든 좋아요 삭제
+	해당 게시글의 모든 댓글 삭제
+	모든 게시글 삭제 
+	모든 팔로잉 삭제
+14-1)
+	delete_user.xml추가
+	
+14-2)
+	UserDAO 34번째줄 추가
+	
+14-3)
+	UserDAOImpl
+	69번째줄
+	
+14-4)
+	UserService
+	35번째줄
+
+14-5)
+	UserServiceImpl
+	127번째줄
+	
+14-6)
+	UserController
+	161번째줄
+	
+-- 0726
+1)	
+	승기씨 파일 합침
+
+2)
+	header.jsp
+	최근검색어를 세션에 저장하는 기능 추가
+	
+2-1)
+	header.jsp
+	47번째줄 폼 태그 내 id추가
+	195~291줄 추가
+	51번째줄 수정	
+	
+2-3)
+	최근검색어 삭제기능 수정
+	(삭제 후에도 그 삭제값이 세션에 저장되어야해서)
+	

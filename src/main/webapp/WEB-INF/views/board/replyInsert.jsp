@@ -28,7 +28,6 @@
 </style>
 </head>
 <body>
-	<c:import url="/WEB-INF/views/header.jsp" />
    <div class="warap">
       <h1 style="text-align: center; font-size: 30px;">댓글 작성</h1>
       <br>
@@ -57,6 +56,5 @@
       </form:form>
    </div>
    <br>
-<c:import url="/WEB-INF/views/footer.jsp" />
 </body>
 </html>
