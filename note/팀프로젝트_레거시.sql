@@ -301,6 +301,8 @@ select * from user1;
 COMMIT;
 
 -- board1 더미데이터 (개행문자 ||CHAR(13)||CHAR(10)||)  delete from board1;
+select * from board1;
+delete from board1 where no<=22;
 
 INSERT INTO board1 VALUES
 (0, 'whatsup', '2010년 1월 4일에 태어난 우리 왓섭이'||CHR(13)||CHR(10)||'매우 귀여우니 심장 조심', 

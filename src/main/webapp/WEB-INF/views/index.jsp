@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
+  <link rel="icon" href="${data_path }/img/logo.jpg">
 	<link rel="stylesheet" href="${data_path }/css/main.css">
 	<link rel="stylesheet" href="${data_path }/css/footer.css">
   <title>main</title>
@@ -160,7 +161,7 @@
 			</figure>
 			<h2 style="font-size:20px;">◆ 프로젝트구성도</h2>
        		<figure class="image is-4by3">
-				<img class="obfit" src="${data_path }/img/coffee.jpg" alt="글사진">
+				<img class="obfit" src="${data_path }/img/pro.png" alt="글사진">
 			</figure>
           	<hr>
             <p style="color: blue;"> #고봉 #설계 #논리적 #물리적 #클래스 #구성 </p>

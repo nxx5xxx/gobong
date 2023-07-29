@@ -9,6 +9,7 @@
 	integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
 	crossorigin="anonymous"></script>
 <!-- //김우주0719 -->
+<%-- <link rel="icon" href="${data_path }/img/logo.jpg"> --%>
 <style>
 li {
 	line-height: 1.5;
@@ -84,7 +85,7 @@ span:hover {
 								<!-- //0724 이재호 -->
 								<!-- 0719 손승기 -->
 								<a href="${path1 }/user/profile?id=${loginUser.id}"
-									class="navbar-item"><img src="">프로필</a> <a
+									class="navbar-item">프로필</a> <a
 									href="${path1 }/user/logout" class="navbar-item">로그아웃</a>
 								<!-- 0719 손승기 -->
 							</div>
@@ -186,11 +187,13 @@ span:hover {
     }
     
   }
+  
+
   let $searchText = document.querySelector('#searchText');
   $searchText.addEventListener('click',function(){
     document.querySelector('#hello').style.display = 'block';
   })
- 
+
 
 	/* 0726김우주 */
 	//검색폼(전송)
@@ -264,7 +267,7 @@ span:hover {
 //		item.appendChild(span);
 //		item.appendChild(del_btn);
 		item.appendChild(del_btn);
-		console.log(text.substring(1));
+//		console.log(text.substring(1));
 
 		const atag = document.createElement("a");
  		if(text.indexOf("#")!==-1){

@@ -16,10 +16,15 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400&family=Orbit&display=swap" rel="stylesheet">
-    <title>Document</title>
+    <title>프로필보기</title>
 	<link rel="stylesheet" href="${data_path }/css/profile.css">
 	<link rel="stylesheet" href="${data_path }/css/main.css">
 	<link rel="stylesheet" href="${data_path }/css/footer.css">
+	<style>
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+	</style>
 </head>
 <body>
 	<c:import url="/WEB-INF/views/header.jsp" />
@@ -114,9 +119,9 @@
 	
 </div>
 
-	<div id="followingListPopup" style="display:none;">
+	<div id="followingListPopup" class="scroll" style="display:none;">
 		<strong>${search[0].name }님의 팔로잉 목록</strong>
-			<div id="follow-text">
+			<div class="follow-text">
 				<c:forEach var="following" items="${followingList }">
 				<a href="${path }/user/profile?id=${following.following_id}"><h3>${following.following_id }</h3></a>
 				</c:forEach>
@@ -124,9 +129,9 @@
 		<!-- <button onclick="listExit()" class="button">나가기</button> -->
 	</div>
 	
-	<div id="followerListPopup" style="display:none;">
+	<div id="followerListPopup" class="scroll" style="display:none;">
 		<strong>${search[0].name }님의 팔로워 목록</strong>
-			<div id="follow-text">
+			<div class="follow-text">
 				<c:forEach var="follower" items="${followerList }">
 				<a href="${path }/user/profile?id=${follower.id}"><h3>${follower.id }</h3></a>
 				</c:forEach>
